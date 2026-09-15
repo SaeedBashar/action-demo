@@ -1,14 +1,19 @@
-name: Test
+name: Explore Actions
+run-name: "${{github.actor}} explores actions"
 
-on: [push]
+on: [workflow_dispatch]
 
 jobs:
-    Output-String-To-Terminal:
-        runs-on: ubuntu-latest
-        steps:
-            - name: produce environment output
-              run: |
-                name='John Doe'
-                echo 'username=$name' >> ${{github.env}}
-            - name: consume env out
-              run: echo "The username provided is ${{github.env.username}}}"
+  Explorer:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This workflow is triggered by ${{github.event_name}} event."
+      - run: echo "It was triggered on ${{github.ref}} for ${{github.repository}}"
+      - run: echo "It is running on ${{runner.os}}"
+      - name: Check out repository
+        uses: actions/checkout@v6
+      - run: echo "Source code has now been checkout on runner"
+      - name: List files in source code
+        run: |
+          ls ${{github.workspace}}
+      - run: echo "The job now has a ${{job.status}} status."
