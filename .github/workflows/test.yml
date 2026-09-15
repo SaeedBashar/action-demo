@@ -1,0 +1,14 @@
+name: Test
+
+on: [push]
+
+jobs:
+    Output-String-To-Terminal:
+        runs-on: ubuntu-latest
+        steps:
+            - name: produce environment output
+              run: |
+                name='John Doe'
+                echo 'username=$name' >> ${{github.env}}
+            - name: consume env out
+              run: echo "The username provided is ${{github.env.username}}}"
