@@ -1,5 +1,5 @@
 name: Explore Actions
-run-name: "${{github.actor}} explores actions"
+run-name: ${{github.actor}} explores actions
 
 on: [workflow_dispatch]
 
